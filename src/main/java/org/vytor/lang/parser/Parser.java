@@ -7,20 +7,13 @@ import java.util.ArrayList;
 public class Parser {
 
     private final ArrayList<Token> tokens;
-    private Integer tokenIndex;
-    private Token currentToken;
+    private TokenNavigation tokenNavigation;
 
-    public Parser(ArrayList<Token> tokens) {
+    public Parser(ArrayList<Token> tokens, TokenNavigation tokenNavigation) {
         this.tokens = tokens;
-        this.tokenIndex = 0;
-        this.currentToken = this.tokens.get(tokenIndex);
+        this.tokenNavigation = tokenNavigation;
     }
 
-    private Token advance() {
-        if (this.tokenIndex < tokens.size()) {
-            this.tokenIndex++;
-            this.currentToken = this.tokens.get(tokenIndex);
-        }
-        return currentToken;
-    }
+    
+
 }

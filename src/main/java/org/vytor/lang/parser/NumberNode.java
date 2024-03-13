@@ -3,7 +3,7 @@ package org.vytor.lang.parser;
 import org.vytor.lang.lexer.Token;
 
 public class NumberNode {
-    private Token token;
+    private final Token token;
 
     public NumberNode(Token token) {
         this.token = token;

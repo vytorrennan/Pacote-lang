@@ -19,7 +19,7 @@ public class CodeNavigation {
 
     private Character getCurrentCharFromSourceCode() {
         if (this.positionSourceCode.getIndex() < sourceCode.length()) {
-            return this.sourceCode.charAt(this.position.getIndex());
+            return this.sourceCode.charAt(this.positionSourceCode.getIndex());
         } else {
             return null;
         }

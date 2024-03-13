@@ -6,20 +6,36 @@ import java.util.ArrayList;
 
 public class TokenNavigation {
     private final ArrayList<Token> tokens;
-    private Integer tokenIndex;
+    private final PositionToken positionToken;
     private Token currentToken;
 
-    public TokenNavigation(ArrayList<Token> tokens) {
+    public TokenNavigation(ArrayList<Token> tokens, PositionToken positionToken) {
         this.tokens = tokens;
-        this.tokenIndex = 0;
-        this.currentToken = this.tokens.get(tokenIndex);
+        this.positionToken = positionToken;
+        this.currentToken = this.tokens.get(positionToken.getTokenIndex());
     }
 
-    public Token advancePosition() {
-        if (this.tokenIndex < tokens.size()) {
-            this.tokenIndex++;
-            this.currentToken = this.tokens.get(tokenIndex);
+    public Token advance() {
+        if (this.positionToken.getTokenIndex() < tokens.size()) {
+            this.positionToken.advancePosition();
+            this.currentToken = this.tokens.get(this.positionToken.getTokenIndex());
+        } else {
+            this.currentToken = null;
         }
+
         return currentToken;
     }
+
+    public ArrayList<Token> getTokens() {
+        return tokens;
+    }
+
+    public PositionToken getPositionToken() {
+        return positionToken;
+    }
+
+    public Token getCurrentToken() {
+        return currentToken;
+    }
+
 }
