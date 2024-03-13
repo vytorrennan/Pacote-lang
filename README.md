@@ -19,4 +19,4 @@ Ao mesmo tempo também é multiplataforma podendo ser utlizada em sistemas:
 - Linux
 - MacOS
 - Android
-- E até mesmo sistemas embarcados
+- E até mesmo alguns sistemas embarcados
