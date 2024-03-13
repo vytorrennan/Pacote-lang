@@ -1,0 +1,2 @@
+rootProject.name = "pacote-lang"
+
