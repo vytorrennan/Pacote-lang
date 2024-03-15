@@ -1,5 +1,5 @@
 # Pacote-lang
-Minha propria linguagem de programação chamada Pacote-lang
+Pacote-lang, uma linguagem de programação interpretada que roda na JVM
 
 ---
 
