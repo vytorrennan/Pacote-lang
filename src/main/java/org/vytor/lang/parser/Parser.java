@@ -3,27 +3,16 @@ package org.vytor.lang.parser;
 import org.vytor.lang.lexer.Token;
 import org.vytor.lang.lexer.TokenType;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Parser {
 
-    private final ArrayList<Token> tokens;
+    private final LinkedList<Token> tokens;
     private final TokenNavigation tokenNavigation;
 
-    public Parser(ArrayList<Token> tokens, TokenNavigation tokenNavigation) {
+    public Parser(LinkedList<Token> tokens) {
         this.tokens = tokens;
-        this.tokenNavigation = tokenNavigation;
+        this.tokenNavigation = new TokenNavigation(tokens);
     }
-
-    public NumberNode factor() {
-        Token token = this.tokenNavigation.getCurrentToken();
-        this.tokenNavigation.advance();
-        if (token.type == TokenType.INT || token.type == TokenType.FLOAT) {
-            return new NumberNode(token);
-        } else {
-            return null;
-        }
-    }
-
 
 }

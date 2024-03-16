@@ -3,15 +3,16 @@ package org.vytor.lang.parser;
 import org.vytor.lang.lexer.Token;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class TokenNavigation {
-    private final ArrayList<Token> tokens;
+    private final LinkedList<Token> tokens;
     private final PositionToken positionToken;
     private Token currentToken;
 
-    public TokenNavigation(ArrayList<Token> tokens, PositionToken positionToken) {
+    public TokenNavigation(LinkedList<Token> tokens) {
         this.tokens = tokens;
-        this.positionToken = positionToken;
+        this.positionToken = new PositionToken();
         this.currentToken = this.tokens.get(positionToken.getTokenIndex());
     }
 
@@ -26,7 +27,7 @@ public class TokenNavigation {
         return currentToken;
     }
 
-    public ArrayList<Token> getTokens() {
+    public LinkedList<Token> getTokens() {
         return tokens;
     }
 

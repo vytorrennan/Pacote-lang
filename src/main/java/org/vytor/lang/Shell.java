@@ -13,8 +13,9 @@ public class Shell {
     public static void shell() {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Pacote-lang v0.1");
         while (true) {
-            System.out.println("pacote-lang: ");
+            System.out.print("> ");
             String sourceCode = scanner.nextLine();
             LinkedList<Token> tokens = Run.run(sourceCode);
 
