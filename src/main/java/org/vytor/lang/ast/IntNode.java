@@ -2,10 +2,10 @@ package org.vytor.lang.ast;
 
 public class IntNode extends Expression{
 
-    public Integer number;
+    public Integer value;
 
-    public IntNode(Integer number) {
+    public IntNode(Integer value) {
         super(NodeType.IntNode);
-        this.number = number;
+        this.value = value;
     }
 }
