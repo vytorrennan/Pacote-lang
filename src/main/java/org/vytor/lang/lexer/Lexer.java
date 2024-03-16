@@ -125,8 +125,10 @@ public class Lexer {
 
                     return exceptionTokenList;
             }
+
         }
 
+        tokens.add(new Token(TokenType.EOF));
         return tokens;
     }
 }

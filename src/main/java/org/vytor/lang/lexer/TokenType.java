@@ -1,6 +1,7 @@
 package org.vytor.lang.lexer;
 
 public enum TokenType {
+    EOF,
     INT,
     FLOAT,
     TRUE,
