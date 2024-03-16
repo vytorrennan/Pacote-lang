@@ -3,7 +3,10 @@ package org.vytor.lang.lexer;
 public enum TokenType {
     INT,
     FLOAT,
+    TRUE,
+    FALSE,
     IDENTIFIER,
+    BINARY_OPERATOR,
     PLUS,
     MINUS,
     MUL,
@@ -11,5 +14,12 @@ public enum TokenType {
     EQUALS,
     OPEN_PAREN,
     CLOSE_PAREN,
+    OPEN_CURLY_BRACKETS,
+    CLOSE_CURLY_BRACKETS,
+    EXIT,
     VAR,
+    IF,
+    ELSE,
+    FOR,
+    WHILE,
 }

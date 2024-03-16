@@ -52,7 +52,10 @@ public class Lexer {
 
     public String makeMultiCharacter() {
         StringBuilder multiCharacter = new StringBuilder();
-        while (this.codeNavigation.getCurrentChar() != null && this.codeNavigation.getCurrentChar() != ' ')
+        while (this.codeNavigation.getCurrentChar() != null &&
+                (isAlpha(this.codeNavigation.getCurrentChar()) ||
+                isNumber(this.codeNavigation.getCurrentChar()) ||
+                this.codeNavigation.getCurrentChar() == '_'))
         {
             multiCharacter.append(this.codeNavigation.getCurrentChar());
             this.codeNavigation.advance();
@@ -70,20 +73,8 @@ public class Lexer {
                 case ' ', '\t':
                     this.codeNavigation.advance();
                     break;
-                case '+':
-                    tokens.add(new Token(TokenType.PLUS));
-                    this.codeNavigation.advance();
-                    break;
-                case '-':
-                    tokens.add(new Token(TokenType.MINUS));
-                    this.codeNavigation.advance();
-                    break;
-                case '*':
-                    tokens.add(new Token(TokenType.MUL));
-                    this.codeNavigation.advance();
-                    break;
-                case '/':
-                    tokens.add(new Token(TokenType.DIV));
+                case '+', '-', '/', '*':
+                    tokens.add(new Token(TokenType.BINARY_OPERATOR));
                     this.codeNavigation.advance();
                     break;
                 case '=':
@@ -96,6 +87,14 @@ public class Lexer {
                     break;
                 case ')':
                     tokens.add(new Token(TokenType.CLOSE_PAREN));
+                    this.codeNavigation.advance();
+                    break;
+                case '{':
+                    tokens.add(new Token(TokenType.OPEN_CURLY_BRACKETS));
+                    this.codeNavigation.advance();
+                    break;
+                case '}':
+                    tokens.add(new Token(TokenType.CLOSE_CURLY_BRACKETS));
                     this.codeNavigation.advance();
                     break;
                 default:
@@ -130,5 +129,4 @@ public class Lexer {
 
         return tokens;
     }
-
 }
