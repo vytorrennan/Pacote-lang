@@ -1,5 +1,5 @@
 # Pacote-lang
-Pacote-lang, uma linguagem de programação interpretada que roda na JVM
+Uma linguagem de programação interpretada que roda na JVM
 
 ---
 
