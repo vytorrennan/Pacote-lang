@@ -2,7 +2,6 @@ package org.vytor.lang.parser;
 
 import org.vytor.lang.lexer.Token;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TokenNavigation {

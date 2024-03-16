@@ -1,9 +1,7 @@
 package org.vytor.lang;
 
-import org.vytor.lang.exceptions.Exception_;
 import org.vytor.lang.lexer.Token;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 

@@ -1,8 +1,5 @@
 package org.vytor.lang.parser;
 
-import org.vytor.lang.lexer.Token;
-
-import java.util.ArrayList;
 
 public class PositionToken {
     private Integer tokenIndex;

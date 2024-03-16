@@ -65,7 +65,6 @@ public class Lexer {
     }
 
     public LinkedList<Token> makeTokens() {
-        // System.out.println(Keywords.KEYWORDS.get("var"));
         LinkedList<Token> tokens = new LinkedList<Token>();
 
         while (this.codeNavigation.getCurrentChar() != null) {
