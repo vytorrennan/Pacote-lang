@@ -3,7 +3,7 @@ package org.vytor.lang.lexer;
 import org.vytor.lang.exceptions.Exception_;
 import org.vytor.lang.exceptions.IllegalCharException;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Lexer {
 
@@ -14,15 +14,21 @@ public class Lexer {
         this.codeNavigation = new CodeNavigation(position, sourceCode);
     }
 
+    public boolean isNumber(Character character) {
+        final int zeroCharacterCode = 48;
+        final int nineCharacterCode = 58;
+        return character > zeroCharacterCode && character <= nineCharacterCode;
+    }
+
     public Token makeNumber() {
         StringBuilder numString = new StringBuilder();
         int dotCount = 0;
-        final String digits = "0123456789";
 
         while (this.codeNavigation.getCurrentChar() != null &&
-                (digits.indexOf(this.codeNavigation.getCurrentChar()) != -1 ||
+                (this.isNumber(this.codeNavigation.getCurrentChar()) ||
                 this.codeNavigation.getCurrentChar().equals('.')))
         {
+            System.out.println(isNumber(this.codeNavigation.getCurrentChar()));
             if (this.codeNavigation.getCurrentChar().equals('.')) {
                 if (dotCount == 1)
                     break;
@@ -41,8 +47,8 @@ public class Lexer {
         }
     }
 
-    public ArrayList<Token> makeTokens() {
-        ArrayList<Token> tokens = new ArrayList<Token>();
+    public LinkedList<Token> makeTokens() {
+        LinkedList<Token> tokens = new LinkedList<Token>();
 
         while (this.codeNavigation.getCurrentChar() != null) {
             switch (this.codeNavigation.getCurrentChar()) {
@@ -65,6 +71,10 @@ public class Lexer {
                     tokens.add(new Token(TokenType.DIV));
                     this.codeNavigation.advance();
                     break;
+                case '=':
+                    tokens.add(new Token(TokenType.EQUALS));
+                    this.codeNavigation.advance();
+                    break;
                 case '(':
                     tokens.add(new Token(TokenType.OPEN_PAREN));
                     this.codeNavigation.advance();
@@ -80,7 +90,7 @@ public class Lexer {
                     Character lastChar = this.codeNavigation.getCurrentChar();
                     PositionSourceCode lastPosition = this.codeNavigation.getPosition().copy();
 
-                    ArrayList<Token> exceptionTokenList = new ArrayList<Token>();
+                    LinkedList<Token> exceptionTokenList = new LinkedList<Token>();
                     Exception_ IllegalCharacter = (Exception_) new IllegalCharException(lastPosition, lastChar);
                     Token exceptionToken = new Token(IllegalCharacter);
                     exceptionTokenList.add(exceptionToken);
