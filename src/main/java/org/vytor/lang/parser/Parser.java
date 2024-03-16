@@ -1,7 +1,6 @@
 package org.vytor.lang.parser;
 
 import org.vytor.lang.lexer.Token;
-import org.vytor.lang.lexer.TokenType;
 
 import java.util.LinkedList;
 
