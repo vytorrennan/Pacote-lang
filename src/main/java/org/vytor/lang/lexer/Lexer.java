@@ -20,6 +20,10 @@ public class Lexer {
         return character > zeroCharacterCode && character <= nineCharacterCode;
     }
 
+    public boolean isAlpha(Character character) {
+        return Character.isAlphabetic(character);
+    }
+
     public Token makeNumber() {
         StringBuilder numString = new StringBuilder();
         int dotCount = 0;
@@ -28,7 +32,6 @@ public class Lexer {
                 (this.isNumber(this.codeNavigation.getCurrentChar()) ||
                 this.codeNavigation.getCurrentChar().equals('.')))
         {
-            System.out.println(isNumber(this.codeNavigation.getCurrentChar()));
             if (this.codeNavigation.getCurrentChar().equals('.')) {
                 if (dotCount == 1)
                     break;
@@ -47,7 +50,19 @@ public class Lexer {
         }
     }
 
+    public String makeMultiCharacter() {
+        StringBuilder multiCharacter = new StringBuilder();
+        while (this.codeNavigation.getCurrentChar() != null && this.codeNavigation.getCurrentChar() != ' ')
+        {
+            multiCharacter.append(this.codeNavigation.getCurrentChar());
+            this.codeNavigation.advance();
+        }
+
+        return multiCharacter.toString();
+    }
+
     public LinkedList<Token> makeTokens() {
+        // System.out.println(Keywords.KEYWORDS.get("var"));
         LinkedList<Token> tokens = new LinkedList<Token>();
 
         while (this.codeNavigation.getCurrentChar() != null) {
@@ -83,10 +98,24 @@ public class Lexer {
                     tokens.add(new Token(TokenType.CLOSE_PAREN));
                     this.codeNavigation.advance();
                     break;
-                case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-                    tokens.add(makeNumber());
-                    break;
                 default:
+                    if (isNumber(this.codeNavigation.getCurrentChar())) {
+                        tokens.add(makeNumber());
+                        continue;
+                    }
+
+                    if (isAlpha(this.codeNavigation.getCurrentChar())) {
+                        Token token;
+                        String multiCharacter = makeMultiCharacter();
+                        if (Keywords.KEYWORDS.get(multiCharacter) != null) {
+                            token = new Token(Keywords.KEYWORDS.get(multiCharacter), multiCharacter);
+                        } else {
+                            token = new Token(TokenType.IDENTIFIER, multiCharacter);
+                        }
+                        tokens.add(token);
+                        continue;
+                    }
+
                     Character lastChar = this.codeNavigation.getCurrentChar();
                     PositionSourceCode lastPosition = this.codeNavigation.getPosition().copy();
 

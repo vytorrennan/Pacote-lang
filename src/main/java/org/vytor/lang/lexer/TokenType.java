@@ -11,4 +11,5 @@ public enum TokenType {
     EQUALS,
     OPEN_PAREN,
     CLOSE_PAREN,
+    VAR,
 }
