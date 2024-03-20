@@ -10,6 +10,10 @@ public class Program extends Statement{
         super(NodeType.Program);
     }
 
+    public void addStatement(Statement statement) {
+        this.allStatements.add(statement);
+    }
+
     public LinkedList<Statement> getAllStatements() {
         return allStatements;
     }

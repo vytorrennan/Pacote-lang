@@ -16,12 +16,8 @@ public class TokenNavigation {
     }
 
     public Token advance() {
-        if (this.positionToken.getTokenIndex() < tokens.size()) {
-            this.positionToken.advancePosition();
-            this.currentToken = this.tokens.get(this.positionToken.getTokenIndex());
-        } else {
-            this.currentToken = null;
-        }
+        this.positionToken.advancePosition();
+        this.currentToken = this.tokens.get(this.positionToken.getTokenIndex());
 
         return currentToken;
     }
@@ -37,5 +33,4 @@ public class TokenNavigation {
     public Token getCurrentToken() {
         return currentToken;
     }
-
 }
