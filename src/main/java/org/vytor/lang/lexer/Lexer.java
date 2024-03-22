@@ -17,7 +17,7 @@ public class Lexer {
     public boolean isNumber(Character character) {
         final int zeroCharacterCode = 48;
         final int nineCharacterCode = 58;
-        return character > zeroCharacterCode && character <= nineCharacterCode;
+        return character >= zeroCharacterCode && character <= nineCharacterCode;
     }
 
     public boolean isAlpha(Character character) {

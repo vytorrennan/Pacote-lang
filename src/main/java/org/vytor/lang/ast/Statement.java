@@ -7,4 +7,10 @@ public abstract class Statement {
         this.nodeType = nodeType;
     }
 
+    @Override
+    public String toString() {
+        return "Statement{" +
+                "nodeType=" + nodeType +
+                '}';
+    }
 }

@@ -20,7 +20,8 @@ public class Parser {
         Program program = new Program();
 
         while (isNotTokenEOF(tokenNavigation.getCurrentToken())) {
-            program.addStatement(this.parseStatement(tokenNavigation.getCurrentToken()));
+            Statement statement = this.parseStatement(tokenNavigation.getCurrentToken());
+            program.addStatement(statement);
             tokenNavigation.advance();
         }
 
@@ -28,6 +29,7 @@ public class Parser {
     }
 
     private Statement parseStatement(Token token) {
+        // we only have expressions for now, so lets do them
         return this.parseExpression(token);
     }
 
