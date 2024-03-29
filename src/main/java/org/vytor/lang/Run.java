@@ -12,7 +12,7 @@ public class Run {
 
     public static LinkedList<Statement> run(String sourceCode) {
         Lexer lexer = new Lexer(sourceCode);
-        Parser parser = new Parser();
-        return parser.parseToAST(lexer.makeTokens()).allStatements;
+        Parser parser = new Parser(lexer.makeTokens());
+        return parser.parseToAST().allStatements;
     }
 }

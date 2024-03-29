@@ -1,9 +1,6 @@
 package org.vytor.lang;
 
-import org.vytor.lang.ast.Program;
-import org.vytor.lang.ast.Statement;
-import org.vytor.lang.lexer.Token;
-import org.vytor.lang.parser.Parser;
+import org.vytor.lang.ast.*;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -22,6 +19,15 @@ public class Shell {
             LinkedList<Statement> allStatements = Run.run(sourceCode);
 
             System.out.println(allStatements);
+            for (Statement stmt: allStatements) {
+                System.out.println(stmt);
+                if (stmt.nodeType == NodeType.BinaryExpression) {
+                    BinaryExpression bynaryExpr = (BinaryExpression) stmt;
+                    System.out.println(bynaryExpr.left);
+                    System.out.println(bynaryExpr.operator);
+                    System.out.println(bynaryExpr.right);
+                }
+            }
             /*
             if (tokens.get(0).exception != null) {
                 System.out.println(tokens.get(0).exception);

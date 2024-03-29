@@ -1,6 +1,7 @@
 package org.vytor.lang.parser;
 
 import org.vytor.lang.lexer.Token;
+import org.vytor.lang.lexer.TokenType;
 
 import java.util.LinkedList;
 
@@ -15,9 +16,16 @@ public class TokenNavigation {
         this.currentToken = this.tokens.get(positionToken.getTokenIndex());
     }
 
+
+    public boolean isNotTokenEOF() {
+        return this.getCurrentToken().type != TokenType.EOF;
+    }
+
     public Token advance() {
-        this.positionToken.advancePosition();
-        this.currentToken = this.tokens.get(this.positionToken.getTokenIndex());
+        if(isNotTokenEOF()) {
+            this.positionToken.advancePosition();
+            this.currentToken = this.tokens.get(this.positionToken.getTokenIndex());
+        }
 
         return currentToken;
     }

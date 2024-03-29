@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Lexer {
 
-    private final CodeNavigation codeNavigation;
+    private CodeNavigation codeNavigation;
 
     public Lexer(String sourceCode) {
         PositionSourceCode position = new PositionSourceCode(0, 0, 0);
@@ -73,7 +73,8 @@ public class Lexer {
                     this.codeNavigation.advance();
                     break;
                 case '+', '-', '/', '*':
-                    tokens.add(new Token(TokenType.BINARY_OPERATOR));
+                    tokens.add(new Token(TokenType.BINARY_OPERATOR,
+                            this.codeNavigation.getCurrentChar().toString()));
                     this.codeNavigation.advance();
                     break;
                 case '=':
@@ -129,5 +130,10 @@ public class Lexer {
 
         tokens.add(new Token(TokenType.EOF));
         return tokens;
+    }
+
+    public void setSourceCode(String sourceCode) {
+        PositionSourceCode position = new PositionSourceCode(0, 0, 0);
+        this.codeNavigation = new CodeNavigation(position, sourceCode);
     }
 }
