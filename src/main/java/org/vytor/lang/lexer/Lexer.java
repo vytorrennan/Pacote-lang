@@ -72,7 +72,7 @@ public class Lexer {
                 case ' ', '\t':
                     this.codeNavigation.advance();
                     break;
-                case '+', '-', '/', '*':
+                case '+', '-', '/', '*', '%':
                     tokens.add(new Token(TokenType.BINARY_OPERATOR,
                             this.codeNavigation.getCurrentChar().toString()));
                     this.codeNavigation.advance();
