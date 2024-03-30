@@ -72,6 +72,8 @@ public class Parser {
         Token token = this.tokenNavigation.getCurrentToken();
         Expression node;
         switch (token.type) {
+            case EXIT:
+                System.exit(0);
             case IDENTIFIER:
                 node = new Identifier(token.value);
                 break;
@@ -91,6 +93,9 @@ public class Parser {
                     System.out.println("Not found close parentesis");
                     System.exit(0);
                 }
+                break;
+            case NULL:
+                node = new Null();
                 break;
             default:
                 node = null;

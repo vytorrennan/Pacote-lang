@@ -6,6 +6,7 @@ public record Keywords() {
 
     public static final Hashtable<String, TokenType> KEYWORDS = new Hashtable<String, TokenType>() {{
         put("exit", TokenType.EXIT);
+        put("null", TokenType.NULL);
         put("true", TokenType.TRUE);
         put("false", TokenType.FALSE);
         put("var", TokenType.VAR);
