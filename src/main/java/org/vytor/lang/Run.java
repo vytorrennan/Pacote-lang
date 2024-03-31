@@ -1,18 +1,18 @@
 package org.vytor.lang;
 
-import org.vytor.lang.ast.Program;
-import org.vytor.lang.ast.Statement;
-import org.vytor.lang.lexer.Lexer;
-import org.vytor.lang.lexer.Token;
-import org.vytor.lang.parser.Parser;
 
-import java.util.LinkedList;
+import org.vytor.lang.interpreter.Interpreter;
+import org.vytor.lang.lexer.Lexer;
+import org.vytor.lang.parser.Parser;
+import org.vytor.lang.runtimeValues.RuntimeValue;
+
 
 public class Run {
 
-    public static LinkedList<Statement> run(String sourceCode) {
+    public static RuntimeValue run(String sourceCode)  {
         Lexer lexer = new Lexer(sourceCode);
         Parser parser = new Parser(lexer.makeTokens());
-        return parser.parseToAST().allStatements;
+        Interpreter interpreter = new Interpreter();
+        return interpreter.evaluate(parser.parseToAST());
     }
 }
