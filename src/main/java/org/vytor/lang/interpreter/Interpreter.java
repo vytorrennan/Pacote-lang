@@ -11,11 +11,11 @@ public class Interpreter {
 
     }
 
-    private RuntimeValue evaluateProgram(Program program) {
+    private RuntimeValue evaluateProgram(Program program, Environment env) {
         RuntimeValue result = new NullValue();
 
         for (Statement node : program.getAllStatements()) {
-            result = evaluate(node);
+            result = evaluate(node, env);
         }
 
         return result;
@@ -47,7 +47,7 @@ public class Interpreter {
                 break;
         }
 
-        if (left instanceof Integer && right instanceof Integer) {
+        if (left instanceof Integer && right instanceof Integer && !operator.equals("/")) {
             return (Integer) ((int) ((float) result));
         } else {
             return result;
@@ -56,11 +56,11 @@ public class Interpreter {
 
 
 
-    private RuntimeValue evaluateBinaryExpression(BinaryExpression binaryExpr) {
+    private RuntimeValue evaluateBinaryExpression(BinaryExpression binaryExpr, Environment env) {
 
-        RuntimeValue left = evaluate(binaryExpr.left);
+        RuntimeValue left = evaluate(binaryExpr.left, env);
         String operator = binaryExpr.operator;
-        RuntimeValue right = evaluate(binaryExpr.right);
+        RuntimeValue right = evaluate(binaryExpr.right, env);
 
         if (left.valueType == ValueType.Float || left.valueType == ValueType.Int &&
                 right.valueType == ValueType.Float || right.valueType == ValueType.Int) {
@@ -78,7 +78,11 @@ public class Interpreter {
         return new NullValue();
     }
 
-    public RuntimeValue evaluate(Statement node) {
+    private RuntimeValue evaluateIdentifier(Identifier node, Environment env) {
+        return env.getValueOfVariable(node.symbol);
+    }
+
+    public RuntimeValue evaluate(Statement node, Environment env) {
 
         switch (node.nodeType) {
             case IntNode:
@@ -86,9 +90,11 @@ public class Interpreter {
             case FloatNode:
                 return new FloatValue(((FloatNode) node).value);
             case BinaryExpression:
-                return evaluateBinaryExpression((BinaryExpression) node);
+                return evaluateBinaryExpression((BinaryExpression) node, env);
+            case Identifier:
+                return evaluateIdentifier((Identifier) node, env);
             case Program:
-                return evaluateProgram((Program) node);
+                return evaluateProgram((Program) node, env);
             case Null:
                 return new NullValue();
             default:

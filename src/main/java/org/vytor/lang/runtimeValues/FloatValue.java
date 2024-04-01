@@ -2,14 +2,11 @@ package org.vytor.lang.runtimeValues;
 
 public class FloatValue extends RuntimeValue implements Number{
 
-    public Float value;
-
     public FloatValue(Float value) {
-        super(ValueType.Float);
-        this.value = value;
+        super(ValueType.Float, value);
     }
 
     public java.lang.Number getNumber() {
-        return this.value;
+        return (java.lang.Number) this.value;
     }
 }

@@ -2,14 +2,11 @@ package org.vytor.lang.runtimeValues;
 
 public class IntValue extends RuntimeValue implements Number{
 
-    public Integer value;
-
     public IntValue(Integer value) {
-        super(ValueType.Int);
-        this.value = value;
+        super(ValueType.Int, value);
     }
 
     public java.lang.Number getNumber() {
-        return this.value;
+        return (java.lang.Number) this.value;
     }
 }
