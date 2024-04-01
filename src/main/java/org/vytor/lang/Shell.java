@@ -1,9 +1,6 @@
 package org.vytor.lang;
 
-import org.vytor.lang.runtimeValues.FloatValue;
-import org.vytor.lang.runtimeValues.IntValue;
-import org.vytor.lang.runtimeValues.NullValue;
-import org.vytor.lang.runtimeValues.RuntimeValue;
+import org.vytor.lang.runtimeValues.*;
 
 import java.util.Scanner;
 
@@ -19,14 +16,7 @@ public class Shell {
             String sourceCode = scanner.nextLine();
             // LinkedList<Token> tokens = Run.run(sourceCode);
             RuntimeValue result = Run.run(sourceCode);
-            if (result instanceof IntValue) {
-                System.out.println(((IntValue) result).value);
-            } else if (result instanceof FloatValue) {
-                System.out.println(((FloatValue) result).value);
-                System.out.println("Float");
-            } else if (result instanceof NullValue) {
-                System.out.println(((NullValue) result).value);
-            }
+            System.out.println(result.value);
             /*
             LinkedList<Statement> allStatements = Run.run(sourceCode);
 

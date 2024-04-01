@@ -94,9 +94,6 @@ public class Parser {
                     System.exit(0);
                 }
                 break;
-            case NULL:
-                node = new Null();
-                break;
             default:
                 node = null;
         };

@@ -95,8 +95,6 @@ public class Interpreter {
                 return evaluateIdentifier((Identifier) node, env);
             case Program:
                 return evaluateProgram((Program) node, env);
-            case Null:
-                return new NullValue();
             default:
                 System.out.println("This node has not bean set on interpreter yet: " + node);
                 System.exit(0);
