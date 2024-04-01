@@ -2,6 +2,7 @@ package org.vytor.lang.interpreter;
 
 import org.vytor.lang.ast.*;
 import org.vytor.lang.runtimeValues.*;
+import org.vytor.lang.runtimeValues.Number;
 
 
 public class Interpreter {
@@ -20,51 +21,40 @@ public class Interpreter {
         return result;
     }
 
-    private IntValue evaluateIntBinaryExpression(IntValue left, String operator, IntValue right) {
-        Integer result = null;
+    private java.lang.Number arithmeticOfNumbers(java.lang.Number left, String operator, java.lang.Number right) {
+        java.lang.Number result = null;
+
         switch (operator) {
             case "+":
-                result = left.value + right.value;
+                result = (left instanceof Integer ? (Integer) left : (Float) left) +
+                        (right instanceof Integer ? (Integer) right : (Float) right);
                 break;
             case "-":
-                result = left.value - right.value;
+                result = (left instanceof Integer ? (Integer) left : (Float) left) -
+                        (right instanceof Integer ? (Integer) right : (Float) right);
                 break;
             case "*":
-                result = left.value * right.value;
+                result = (left instanceof Integer ? (Integer) left : (Float) left) *
+                        (right instanceof Integer ? (Integer) right : (Float) right);
                 break;
             case "/":
-                result = left.value / right.value;
+                result = (left instanceof Integer ? (Integer) left : (Float) left) /
+                        (right instanceof Integer ? (Integer) right : (Float) right);
                 break;
             case "%":
-                result = left.value % right.value;
+                result = (left instanceof Integer ? (Integer) left : (Float) left) %
+                        (right instanceof Integer ? (Integer) right : (Float) right);
                 break;
         }
 
-        return new IntValue(result);
-    }
-
-    private FloatValue evaluateFloatBinaryExpression(FloatValue left, String operator, FloatValue right) {
-        Float result = null;
-        switch (operator) {
-            case "+":
-                result = left.value + right.value;
-                break;
-            case "-":
-                result = left.value - right.value;
-                break;
-            case "*":
-                result = left.value * right.value;
-                break;
-            case "/":
-                result = left.value / right.value;
-                break;
-            case "%":
-                result = left.value % right.value;
-                break;
+        if (left instanceof Integer && right instanceof Integer) {
+            return (Integer) ((int) ((float) result));
+        } else {
+            return result;
         }
-
-        return new FloatValue(result);
     }
+
+
 
     private RuntimeValue evaluateBinaryExpression(BinaryExpression binaryExpr) {
 
@@ -72,17 +62,18 @@ public class Interpreter {
         String operator = binaryExpr.operator;
         RuntimeValue right = evaluate(binaryExpr.right);
 
-        if (left.valueType == ValueType.Int) {
-            if (right.valueType == ValueType.Int) {
-                return evaluateIntBinaryExpression((IntValue) left, operator, (IntValue) right);
-            }
-        }
-        if (left.valueType == ValueType.Float) {
-            if (right.valueType == ValueType.Float) {
-                return evaluateFloatBinaryExpression((FloatValue) left, operator, (FloatValue) right);
-            }
-        }
+        if (left.valueType == ValueType.Float || left.valueType == ValueType.Int &&
+                right.valueType == ValueType.Float || right.valueType == ValueType.Int) {
 
+            java.lang.Number result =
+                    arithmeticOfNumbers(((Number) left).getNumber(), operator, ((Number) right).getNumber());
+
+            if (result instanceof Integer) {
+                return new IntValue((Integer) result);
+            } else {
+                return new FloatValue((Float) result);
+            }
+        }
 
         return new NullValue();
     }

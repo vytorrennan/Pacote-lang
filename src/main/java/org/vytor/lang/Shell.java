@@ -23,6 +23,7 @@ public class Shell {
                 System.out.println(((IntValue) result).value);
             } else if (result instanceof FloatValue) {
                 System.out.println(((FloatValue) result).value);
+                System.out.println("Float");
             } else if (result instanceof NullValue) {
                 System.out.println(((NullValue) result).value);
             }
