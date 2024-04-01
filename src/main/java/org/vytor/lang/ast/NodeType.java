@@ -6,5 +6,6 @@ public enum NodeType {
     IntNode,
     FloatNode,
     Identifier,
+    VariableAssignment,
     BinaryExpression,
 }

@@ -13,15 +13,10 @@ import org.vytor.lang.runtimeValues.RuntimeValue;
 
 public class Run {
 
-    public static RuntimeValue run(String sourceCode) {
+    public static RuntimeValue run(String sourceCode, Environment env) {
         Lexer lexer = new Lexer(sourceCode);
         Parser parser = new Parser(lexer.makeTokens());
         Interpreter interpreter = new Interpreter();
-        Environment env = new Environment();
-        env.declareVariable("x", new IntValue(100));
-        env.declareVariable("true", new BooleanValue(true));
-        env.declareVariable("false", new BooleanValue(false));
-        env.declareVariable("null", new NullValue());
         return interpreter.evaluate(parser.parseToAST(), env);
     }
 }

@@ -14,6 +14,10 @@ public class Program extends Statement{
         this.allStatements.add(statement);
     }
 
+    public Statement popStatement() {
+        return this.allStatements.pop();
+    }
+
     public LinkedList<Statement> getAllStatements() {
         return allStatements;
     }

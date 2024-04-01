@@ -54,16 +54,15 @@ public class Interpreter {
         }
     }
 
-
-
     private RuntimeValue evaluateBinaryExpression(BinaryExpression binaryExpr, Environment env) {
 
         RuntimeValue left = evaluate(binaryExpr.left, env);
         String operator = binaryExpr.operator;
         RuntimeValue right = evaluate(binaryExpr.right, env);
 
-        if (left.valueType == ValueType.Float || left.valueType == ValueType.Int &&
-                right.valueType == ValueType.Float || right.valueType == ValueType.Int) {
+
+        if ((left.valueType == ValueType.Float || left.valueType == ValueType.Int) &&
+                (right.valueType == ValueType.Float || right.valueType == ValueType.Int)) {
 
             java.lang.Number result =
                     arithmeticOfNumbers(((Number) left).getNumber(), operator, ((Number) right).getNumber());
@@ -82,6 +81,10 @@ public class Interpreter {
         return env.getValueOfVariable(node.symbol);
     }
 
+    private RuntimeValue evaluateVariableAssignment(VariableAssignment node, Environment env) {
+        return env.assignVariable(node.identifier.symbol, evaluate(node.expression, env));
+    }
+
     public RuntimeValue evaluate(Statement node, Environment env) {
 
         switch (node.nodeType) {
@@ -93,6 +96,8 @@ public class Interpreter {
                 return evaluateBinaryExpression((BinaryExpression) node, env);
             case Identifier:
                 return evaluateIdentifier((Identifier) node, env);
+            case VariableAssignment:
+                return evaluateVariableAssignment((VariableAssignment) node, env);
             case Program:
                 return evaluateProgram((Program) node, env);
             default:

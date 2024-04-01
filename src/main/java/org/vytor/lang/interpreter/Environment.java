@@ -19,7 +19,7 @@ public class Environment {
         this.variables = new HashMap<String, RuntimeValue>();
     }
 
-    public RuntimeValue declareVariable(String variableName, RuntimeValue value) {
+    private RuntimeValue declareVariable(String variableName, RuntimeValue value) {
         if (this.variables.containsKey(variableName)) {
             throw new RuntimeException("Variable already exists.");
         }

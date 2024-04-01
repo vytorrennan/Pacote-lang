@@ -21,17 +21,27 @@ public class Parser {
         Program program = new Program();
 
         while (tokenNavigation.isNotTokenEOF()) {
-            Statement statement = this.parseStatement();
+            Statement statement = this.parseStatement(program);
             program.addStatement(statement);
-            this.tokenNavigation.advance();
         }
 
         return program;
     }
 
-    private Statement parseStatement() {
+    private Statement parseStatement(Program program) {
         // we only have expressions for now, so lets do them
-        return this.parseExpression();
+        switch (this.tokenNavigation.getCurrentToken().type) {
+            case EQUALS:
+                Statement identifier = program.popStatement();
+                if (!(identifier instanceof Identifier)) {
+                    throw new RuntimeException("Variable Assignment without identifier");
+                }
+                this.tokenNavigation.advance();
+                Expression expression = this.parseExpression();
+                return new VariableAssignment((Identifier) identifier, expression);
+            default:
+                return this.parseExpression();
+        }
     }
 
     private Expression parseExpression() {
@@ -90,13 +100,13 @@ public class Parser {
                     node = expression;
                 } else {
                     node = null;
-                    System.out.println("Not found close parentesis");
+                    System.out.println("Didn't found close parenthesis");
                     System.exit(0);
                 }
                 break;
             default:
                 node = null;
-        };
+        }
         this.tokenNavigation.advance();
         return node;
     }
