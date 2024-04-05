@@ -32,16 +32,23 @@ public class Parser {
         // we only have expressions for now, so lets do them
         switch (this.tokenNavigation.getCurrentToken().type) {
             case EQUALS:
-                Statement identifier = program.popStatement();
-                if (!(identifier instanceof Identifier)) {
-                    throw new RuntimeException("Variable Assignment without identifier");
-                }
-                this.tokenNavigation.advance();
-                Expression expression = this.parseExpression();
-                return new VariableAssignment((Identifier) identifier, expression);
+                return parseVariableAssignment(program, program.popStatement());
             default:
                 return this.parseExpression();
         }
+    }
+
+    private Statement parseVariableAssignment(Program program, Statement identifier) {
+        System.out.println(identifier);
+        if (!(identifier instanceof Identifier)) {
+            throw new RuntimeException("Variable Assignment without identifier");
+        }
+        this.tokenNavigation.advance();
+        Expression expression = this.parseExpression();
+        if (expression instanceof Identifier && this.tokenNavigation.getCurrentToken().type == TokenType.EQUALS) {
+            program.addStatement(parseVariableAssignment(program, expression));
+        }
+        return new VariableAssignment((Identifier) identifier, expression);
     }
 
     private Expression parseExpression() {
