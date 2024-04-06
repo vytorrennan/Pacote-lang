@@ -39,7 +39,6 @@ public class Parser {
     }
 
     private Statement parseVariableAssignment(Program program, Statement identifier) {
-        System.out.println(identifier);
         if (!(identifier instanceof Identifier)) {
             throw new RuntimeException("Variable Assignment without identifier");
         }
