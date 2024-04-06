@@ -9,9 +9,6 @@ A Pacote-lang faz parte do grupo de linguagens que utilizam da Java Virtual Mach
 - x86 e x86-64
 - ARM
 - PowerPC
-- SPARC
-- MIPS
-- Itanium
 - Dentre outras
 
 Ao mesmo tempo também é multiplataforma podendo ser utlizada em sistemas:
