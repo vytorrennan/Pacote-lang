@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("/home/pacote/Projects/Pacote-lang/src/main/java/org/vytor/code.pact");
+        File file = new File("./src/main/java/org/vytor/code.pact");
         Object result = ExecFile.execFile(file);
         System.out.println(result);
     }
