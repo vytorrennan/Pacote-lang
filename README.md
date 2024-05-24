@@ -17,3 +17,10 @@ Ao mesmo tempo também é multiplataforma podendo ser utlizada em sistemas:
 - MacOS
 - Android
 - E até mesmo alguns sistemas embarcados
+
+---
+
+A linguagem atualmente suporta operações aritimeticas como soma, subtração, muiltiplicação e divisão
+Também possui suporte a variaveis de tipagem dinamica
+
+A declaração de variaveis é feita sem qualquer prefixo, muito semelhante a linguagem python: a = 10
