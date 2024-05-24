@@ -23,4 +23,12 @@ Ao mesmo tempo também é multiplataforma podendo ser utlizada em sistemas:
 A linguagem atualmente suporta operações aritimeticas como soma, subtração, muiltiplicação e divisão
 Também possui suporte a variaveis de tipagem dinamica
 
-A declaração de variaveis é feita sem qualquer prefixo, muito semelhante a linguagem python: a = 10
+A declaração de variaveis é feita sem qualquer prefixo, muito semelhante a linguagem python
+
+Exemplo de sintaxe:
+```
+a = 10
+x = 5.3
+b = a + x
+x = a = b
+```
