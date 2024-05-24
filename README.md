@@ -32,3 +32,5 @@ x = 5.3
 b = a + x
 x = a = b
 ```
+
+Para executar a linguagem, apenas escreva o codigo no arquivo ¨Code.pac¨ loco abaixo do arquivo Main, e execute o arquivo Main.
