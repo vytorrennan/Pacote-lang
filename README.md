@@ -1,7 +1,6 @@
 # Pacote-lang - EN
 An interpreted programming language that runs on the JVM
 
----
 
 Pacote-lang is a weakly and dynamically typed programming language.
 
@@ -38,12 +37,11 @@ x = a = b
 
 To run the language, simply write your code in the `code.pact` file located alongside the `Main` file, then execute `Main`.
 
-
+---
 
 # Pacote-lang - PT-BR
 Uma linguagem de programação interpretada que roda na JVM
 
----
 
 A Pacote-lang é uma linguagem de tipagem fraca e dinamica
 
